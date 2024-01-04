@@ -1,0 +1,55 @@
+ext {
+    scalaMajorVersion = "3"
+    scalaVersion = "$scalaMajorVersion.3.1"
+    scalaMinorVersion = "2.13.8"
+    scalaLoggingVersion = "3.9.5"
+    calibanVersion = "2.5.0"
+    logbackVersion = "1.3.0"
+    pekkoHttpPlayJsonVersion = "2.3.2"
+    pekkoHttpVersion = "1.0.0"
+    pekkoTypedActorVersion = "1.0.2"
+    tapirJsonCirceVersion = "1.9.6"
+    zioVersion = "2.0.20"
+}
+
+dependencyManagement {
+    dependencies {
+        dependencySet(group: "org.scala-lang", version: scalaVersion) {
+            entry "scala3-compiler_3"
+            entry "scala3-library_3"
+        }
+
+        dependency "org.scala-lang:scalap:${scalaMinorVersion}"
+
+        dependency "ch.qos.logback:logback-classic:${logbackVersion}"
+
+        dependencySet(group: "com.github.ghostdogpr", version: calibanVersion) {
+            entry("caliban_3")
+            entry("caliban-pekko-http_3")
+        }
+
+        dependency "com.github.pjfanning:pekko-http-play-json_3:${pekkoHttpPlayJsonVersion}"
+
+        dependency "com.softwaremill.sttp.tapir:tapir-json-circe_3:${tapirJsonCirceVersion}"
+
+        dependency "com.typesafe.scala-logging:scala-logging_3:${scalaLoggingVersion}"
+
+        dependencySet(group: "dev.zio", version: zioVersion) {
+            entry("zio_3")
+            entry("zio-streams_3")
+        }
+
+        dependency "org.apache.pekko:pekko-actor_3:${pekkoTypedActorVersion}"
+        dependency "org.apache.pekko:pekko-actor-typed_3:${pekkoTypedActorVersion}"
+
+        dependencySet(group: "org.apache.pekko", version: pekkoHttpVersion) {
+            entry("pekko-http_3")
+            entry("pekko-http-core_3")
+        }
+    }
+}
+
+
+//            https://github.com/samueleresca/pekko-quartz-scheduler
+//            https://github.com/lomigmegard/pekko-http-cors
+//            https://github.com/RustedBones/pekko-http-metrics

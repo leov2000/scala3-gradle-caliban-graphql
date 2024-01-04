@@ -1,0 +1,21 @@
+apply plugin: "scala"
+
+scala {
+    zincVersion = "2.0.0-alpha10"
+}
+
+dependencies {
+    zinc 'com.eed3si9n:sjson-new-core_3:0.14.0-M1'
+    zinc 'net.java.dev.jna:jna:5.9.0'
+    zinc 'org.scala-sbt:zinc_3:2.0.0-alpha10'
+    zinc 'org.scala-sbt:compiler-interface:2.0.0-alpha10'
+    zinc 'org.scala-lang:scala3-compiler_3:3.3.1'
+    zinc 'org.scala-lang:scala3-library_3:3.3.1'
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.forkOptions.with {
+        jvmArgs = ["-Xss32m", "-Xmx2048m"]
+    }
+    scalaCompileOptions.additionalParameters = ["-Wunused:implicits"]
+}

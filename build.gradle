@@ -1,0 +1,34 @@
+buildscript { buildExec ->
+    apply from: "${project.rootDir}/gradle/repositories.gradle", to: buildExec
+    apply from: "${project.rootDir}/gradle/buildscript-dependencies.gradle", to: buildExec
+}
+
+def scalaProjects = [
+        project(":app")
+]
+
+configure(scalaProjects) {
+    apply from: "${project.rootDir}/gradle/scala.gradle"
+}
+
+subprojects {
+    apply plugin: "io.spring.dependency-management"
+    apply from: "${project.rootDir}/gradle/repositories.gradle"
+    apply from: "${project.rootDir}/gradle/dependencies.gradle"
+}
+
+allprojects {
+    apply plugin: "bloop"
+
+    afterEvaluate { proj ->
+        if (!project.tasks.findByName("clean")) {
+            task clean(type: Delete)
+        }
+
+        clean.doFirst {
+            delete "${proj.projectDir}/build"
+            delete "${proj.projectDir}/out"
+            delete "${proj.projectDir}/target"
+        }
+    }
+}

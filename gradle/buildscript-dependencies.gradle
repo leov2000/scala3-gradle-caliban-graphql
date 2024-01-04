@@ -1,0 +1,6 @@
+dependencies {
+    classpath "io.spring.gradle:dependency-management-plugin:1.1.4"
+    classpath "org.slf4j:log4j-over-slf4j:1.7.36"
+    classpath "ch.epfl.scala:gradle-bloop_2.13:1.6.2"
+    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.33.10"
+}
